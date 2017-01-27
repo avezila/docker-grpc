@@ -16,4 +16,4 @@ RUN go get google.golang.org/grpc
 RUN go get github.com/golang/protobuf/protoc-gen-go
 RUN mkdir -p /grpc
 WORKDIR /grpc
-CMD /usr/local/bin/protoc --go_out=plugins=grpc:. `find . | grep .*\.proto$`
+CMD mkdir -p generated && /usr/local/bin/protoc --go_out=plugins=grpc:./generated --java_out=./generated --js_out=library=grpc,binary:./generated `find . | grep .*\.proto$`
