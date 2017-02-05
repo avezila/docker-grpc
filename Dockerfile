@@ -15,5 +15,6 @@ RUN go get google.golang.org/grpc
 # Install protoc-gen-go
 RUN go get github.com/golang/protobuf/protoc-gen-go
 RUN mkdir -p /grpc
+RUN dnf install nodejs
 WORKDIR /grpc
 CMD mkdir -p generated && /usr/local/bin/protoc --go_out=plugins=grpc:./generated --java_out=./generated --js_out=library=grpc,binary:./generated `find . | grep .*\.proto$`
