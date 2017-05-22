@@ -14,7 +14,18 @@ RUN mkdir -p /tmp/protoc && \
 RUN go get google.golang.org/grpc
 # Install protoc-gen-go
 RUN go get github.com/golang/protobuf/protoc-gen-go
+RUN go get github.com/gogo/protobuf/protoc-gen-gogo
+RUN go get github.com/gogo/protobuf/protoc-gen-gofast
+RUN go get github.com/gogo/protobuf/protoc-gen-gogofast
+RUN go get github.com/gogo/protobuf/protoc-gen-gogofaster
+RUN go get github.com/gogo/protobuf/protoc-gen-gogoslick
+RUN go get github.com/gogo/protobuf/proto
+RUN go get github.com/gogo/protobuf/jsonpb
+RUN go get github.com/gogo/protobuf/gogoproto
+RUN go get golang.org/x/tools/cmd/goimports
+RUN go get github.com/jackspirou/pimports
+
 RUN mkdir -p /grpc
-RUN dnf install nodejs
+RUN dnf install nodejs -y
 WORKDIR /grpc
 CMD mkdir -p generated && /usr/local/bin/protoc --go_out=plugins=grpc:./generated --java_out=./generated --js_out=library=grpc,binary:./generated `find . | grep .*\.proto$`
