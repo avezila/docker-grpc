@@ -2,7 +2,7 @@ FROM avezila/go
 
 # install protobuf
 RUN mkdir -p /tmp/protoc && \
-    curl -L https://github.com/google/protobuf/releases/download/v3.1.0/protoc-3.1.0-linux-x86_64.zip > /tmp/protoc/protoc.zip && \
+    curl -L https://github.com/google/protobuf/releases/download/v3.3.0/protoc-3.3.0-linux-x86_64.zip > /tmp/protoc/protoc.zip && \
     cd /tmp/protoc && \
     unzip protoc.zip && \
     cp /tmp/protoc/bin/protoc /usr/local/bin && \
@@ -27,5 +27,7 @@ RUN go get github.com/jackspirou/pimports
 
 RUN mkdir -p /grpc
 RUN dnf install nodejs -y
+RUN npm i -g protobufjs
 WORKDIR /grpc
-CMD mkdir -p generated && /usr/local/bin/protoc --go_out=plugins=grpc:./generated --java_out=./generated --js_out=library=grpc,binary:./generated `find . | grep .*\.proto$`
+CMD mkdir -p generated && /usr/local/bin/protoc --go_out=plugins=grpc:./generated --java_out=./generated --js_out=library=grpc,binary:./generated `find . | grep .*\.proto$
+
