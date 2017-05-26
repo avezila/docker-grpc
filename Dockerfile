@@ -27,7 +27,7 @@ RUN go get github.com/jackspirou/pimports
 
 RUN mkdir -p /grpc
 RUN dnf install nodejs -y
-RUN npm i -g protobufjs
+RUN npm i -g protobufjs && echo | pbjs -
 WORKDIR /grpc
 CMD mkdir -p generated && /usr/local/bin/protoc --go_out=plugins=grpc:./generated --java_out=./generated --js_out=library=grpc,binary:./generated `find . | grep .*\.proto$
 
